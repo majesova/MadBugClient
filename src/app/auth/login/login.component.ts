@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   authenticate(){
     //manipulate the model
+    console.info("Esto va a mandar a guardar");
   }
 
 }

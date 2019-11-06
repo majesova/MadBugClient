@@ -1,18 +1,40 @@
-<form class="form-signin">
+<!--template driven-->
+
+<form class="form-signin" (ngSubmit)="authenticate()" #loginForm="ngForm">
     <!--<img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only"  >Email address</label>
-    <input name="email" [(ngModel)]="model.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label for="inputEmail"  class="sr-only"  >Email address</label>
+    <input #emailVar="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+    name="email" [(ngModel)]="model.email" type="email" id="inputEmail" 
+    class="form-control" placeholder="Email address" required autofocus
+    [ngClass]="{'error':(emailVar.touched && !emailVar.valid)}"
+    >
+
+    <div class="alert alert-danger" *ngIf="emailVar.touched && !emailVar.valid">
+      Proporcione un email válido
+    </div>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input name="password" [(ngModel)]="model.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <input #passwordVar="ngModel" name="password" [(ngModel)]="model.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <div class="alert alert-danger" *ngIf="passwordVar.touched && !passwordVar.valid">
+      Proporcione un email válido
+    </div>
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" [disabled]="!loginForm.valid" type="submit" >Sign in</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
   </form>
   <pre>
-      {{model | json}}
+      email touched {{emailVar.touched}}
+      password touched {{passwordVar.touched}}
+
+      email valid {{emailVar.valid}}
+      password valid {{passwordVar.valid}}
+
+      email dirty {{emailVar.dirty}}
+      password dirty {{passwordVar.dirty}}
+
+      form valid: {{loginForm.valid}}
   </pre>
