@@ -1,11 +1,11 @@
 <!--template driven-->
 
-<form class="form-signin" (ngSubmit)="authenticate()" #loginForm="ngForm">
+<form class="form-signin" (ngSubmit)="authenticate(loginForm)" #loginForm="ngForm">
     <!--<img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputEmail"  class="sr-only"  >Email address</label>
     <input #emailVar="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
-    name="email" [(ngModel)]="model.email" type="email" id="inputEmail" 
+    name="userName" [(ngModel)]="model.email" type="email" id="inputEmail" 
     class="form-control" placeholder="Email address" required autofocus
     [ngClass]="{'error':(emailVar.touched && !emailVar.valid)}"
     >
@@ -25,8 +25,13 @@
     </div>
     <button class="btn btn-lg btn-primary btn-block" [disabled]="!loginForm.valid" type="submit" >Sign in</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+
+    <div class="alert alert-danger" *ngIf="loginError.length > 0">
+      {{loginError}}
+    </div>
+
   </form>
-  <pre>
+  <!--<pre>
       email touched {{emailVar.touched}}
       password touched {{passwordVar.touched}}
 
@@ -36,5 +41,5 @@
       email dirty {{emailVar.dirty}}
       password dirty {{passwordVar.dirty}}
 
-      form valid: {{loginForm.valid}}
-  </pre>
+      form: {{loginForm.value | json}}
+  </pre>-->

@@ -9,21 +9,29 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component' 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from './services/auth.service';
+
+import {HttpClientModule} from '@angular/common/http';
+import { BuglistComponent } from './bugs/buglist/buglist.component';
+import { AddbugComponent } from './bugs/addbug/addbug.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    BuglistComponent,
+    AddbugComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
