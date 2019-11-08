@@ -1,1 +1,35 @@
-<p>buglist works!</p>
+<h2>Listado de bugs!</h2>
+
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Is Fixed</th>
+        <th scope="col">Created Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of bugs; let i = index">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.title}}</td>
+        <td>
+            <span *ngIf="item.isFixed">YES</span>
+            <span *ngIf="!item.isFixed">NO</span>
+        </td>
+        
+        <td>{{item.createdAt | date}}</td>
+        <td>
+          <button class="btn btn-danger"
+          (click)="delete(item, i)">Eliminar</button>
+          <button class="btn btn-warning"
+          (click)="modify(item, i)">Editar</button>
+        </td>
+      </tr>      
+    </tbody>
+  </table>
+
+
+
+

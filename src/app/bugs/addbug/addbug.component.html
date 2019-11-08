@@ -1,1 +1,52 @@
-<p>addbug works!</p>
+<!--Formulario para registrar un bug nuevo-->
+<h2>Nuevo bug</h2>
+
+<form [formGroup]="bugForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+                <label for="title">Title</label>
+                <input formControlName="title"  type="text" class="form-control" id="title"  placeholder="Enter title" />
+        <div *ngIf="title.invalid && (title.dirty || title.touched)"
+        class="alert alert-danger">
+    
+        <div *ngIf="title.errors.required">
+        Title is required
+        </div>
+        <div *ngIf="title.errors.maxlength">
+        Title es demasiado grande actual es {{title.errors.maxlength.actualLength}}, 
+        no debe de pasar de : {{title.errors.maxlength.requiredLength}}, te pasaste por:
+        {{title.errors.maxlength.actualLength - title.errors.maxlength.requiredLength }}
+        <!--"requiredLength": 100,
+    "actualLength": 189-->
+        </div>
+    </div>
+        </div>
+        <div class="form-group">
+                <label for="body">Description of issue</label>
+                <textarea  formControlName="body" class="form-control" id="body" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+                <label for="stepsToReproduce">Steps to reproduce the issue</label>
+                <textarea  formControlName="stepsToReproduce" class="form-control" id="stepsToReproduce" rows="3"></textarea>
+        </div>
+        <div class="form-group col-md-4">
+                <label for="severity">State</label>
+                <select  formControlName="severity" id="severity" class="form-control">
+                  <option value="1">NORMAL</option>
+                  <option value="2">SEVERE</option>
+                  <option value="3">FATAL</option>
+                </select>
+        </div>
+        <div class="form-group row">
+                <div class="col-sm-10 text-right">
+                  <button type="submit" class="btn btn-primary"
+                  [disabled]="!bugForm.valid">Guardar</button>
+                </div>
+        </div>
+</form>
+
+<pre>
+    {{bugForm.value | json}}
+
+    Form valid: {{bugForm.valid}}
+</pre>
+

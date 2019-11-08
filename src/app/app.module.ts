@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component' 
@@ -14,6 +14,8 @@ import { AuthService } from './services/auth.service';
 import {HttpClientModule} from '@angular/common/http';
 import { BuglistComponent } from './bugs/buglist/buglist.component';
 import { AddbugComponent } from './bugs/addbug/addbug.component';
+import { BugService } from './services/bug.service';
+import { FromnowPipe } from './shared/fromnow.pipe';
 
 @NgModule({
   declarations: [
@@ -22,16 +24,18 @@ import { AddbugComponent } from './bugs/addbug/addbug.component';
     LoginComponent,
     DashboardComponent,
     BuglistComponent,
-    AddbugComponent
-  ],
+    AddbugComponent,
+    FromnowPipe
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, BugService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
